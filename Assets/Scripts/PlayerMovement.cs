@@ -42,8 +42,6 @@ public class PlayerMovement : MonoBehaviour
 		{
 			Move();
 		}
-		
-		Debug.Log($"Velocity: {_rigidbody.velocity.magnitude}");
 	}
 
 	private void Jump()
@@ -88,8 +86,6 @@ public class PlayerMovement : MonoBehaviour
 		foreach (var contact in contacts)
 		{
 			Vector3 contactNormal = contact.normal;
-			
-			Debug.Log(contact.normal);
 
 			if (contactNormal.y >= _slopeNormalLimit)
 				_isGrounded = true;
