@@ -14,13 +14,8 @@ public class Coin : MonoBehaviour
 		ScoreValue = rnd.Next(0, _maxScoreValue + 1);
 	}
 
-	private void OnTriggerEnter(Collider other)
+	public void Collect()
 	{
-		PlayerMovement player = other.GetComponent<PlayerMovement>();
-
-		if (player != null)
-		{
-			gameObject.SetActive(false);
-		}
+		gameObject.SetActive(false);
 	}
 }

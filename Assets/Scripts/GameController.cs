@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -7,7 +8,7 @@ public class GameController : MonoBehaviour
 	private const float TimeStep = 1.0f; 
 	
 	[SerializeField] private float _startGameTimeInSeconds;
-	[SerializeField] private List<Coin> _allCoins;
+	[SerializeField] private CoinCollector _coinCollector;
 	
 	private float _gameTimeLeft;
 	private float _timeStepConter;
@@ -20,7 +21,6 @@ public class GameController : MonoBehaviour
 	{
 		_gameTimeLeft = _startGameTimeInSeconds;
 		_isGameEnd = false;
-		_previousAvailableCoins = _allCoins.Count;
 	}
 
 	private void Update()
@@ -35,13 +35,17 @@ public class GameController : MonoBehaviour
 
 	private void Win()
 	{
-		Debug.Log($"Ура! Вы подбедили и собрали {_allCoins.Count} монет.");
+		Debug.Log($"Ура! Вы подбедили и собрали {_coinCollector.CollectedCoins.Count} монет.");
+		Debug.Log($"Вы заработали {_coinCollector.CollectedCoins.Sum(x => x.ScoreValue)} очков");
 		Time.timeScale = 0.0f;
 	}
 
 	private void Lose()
 	{
-		Debug.Log($"Вы не успели собрать {_previousAvailableCoins} монет :(");
+		int availableCoins = _coinCollector.LevelCoinsCount - _coinCollector.CollectedCoins.Count;
+
+		Debug.Log($"Вы не успели собрать {availableCoins} монет :(");
+		Debug.Log($"Вы заработали {_coinCollector.CollectedCoins.Sum(x => x.ScoreValue)} очков");
 		Time.timeScale = 0.0f;
 	}
 
@@ -74,20 +78,11 @@ public class GameController : MonoBehaviour
 
 	private void CheckAvailableCoins()
 	{
-		int availableCoins = 0;
-
-		foreach (var coin in _allCoins)
-		{
-			if (coin.gameObject.activeSelf)
-			{
-				availableCoins++;
-			}
-		}
+		int availableCoins = _coinCollector.LevelCoinsCount - _coinCollector.CollectedCoins.Count;
 
 		if (availableCoins != _previousAvailableCoins)
 		{
-			int collectedCoins = _allCoins.Count - availableCoins;
-			Debug.Log($"Вы собрали {collectedCoins}/{_allCoins.Count} монет, ещё осталось {availableCoins} монет");
+			Debug.Log($"Вы собрали {_coinCollector.CollectedCoins.Count}/{_coinCollector.LevelCoinsCount} монет, ещё осталось {availableCoins} монет");
 		}
 
 		_previousAvailableCoins = availableCoins;
