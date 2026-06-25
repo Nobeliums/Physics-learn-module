@@ -5246,25 +5246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startGameTimeInSeconds: 90
-  _allCoins:
-  - {fileID: 935706325}
-  - {fileID: 441606059}
-  - {fileID: 1827639776}
-  - {fileID: 367994235}
-  - {fileID: 105089162}
-  - {fileID: 277661952}
-  - {fileID: 1690543971}
-  - {fileID: 1105877697}
-  - {fileID: 58899322}
-  - {fileID: 389837053}
-  - {fileID: 247822648}
-  - {fileID: 1307704170}
-  - {fileID: 586603405}
-  - {fileID: 602358011}
-  - {fileID: 1502825610}
-  - {fileID: 902513783}
-  - {fileID: 1697417095}
-  - {fileID: 1489262928}
+  _coinCollector: {fileID: 2132134633}
 --- !u!4 &1749434770
 Transform:
   m_ObjectHideFlags: 0
@@ -6154,6 +6136,7 @@ GameObject:
   - component: {fileID: 2132134628}
   - component: {fileID: 2132134632}
   - component: {fileID: 2132134627}
+  - component: {fileID: 2132134633}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6290,6 +6273,37 @@ MonoBehaviour:
   _moveForce: 5
   _maxForce: 15
   _isGrounded: 0
+--- !u!114 &2132134633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132134626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c5a999fc327d3143bf70a2ad7d6047f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allCoins:
+  - {fileID: 935706325}
+  - {fileID: 441606059}
+  - {fileID: 1827639776}
+  - {fileID: 367994235}
+  - {fileID: 105089162}
+  - {fileID: 277661952}
+  - {fileID: 1690543971}
+  - {fileID: 1105877697}
+  - {fileID: 58899322}
+  - {fileID: 389837053}
+  - {fileID: 247822648}
+  - {fileID: 1307704170}
+  - {fileID: 586603405}
+  - {fileID: 602358011}
+  - {fileID: 1502825610}
+  - {fileID: 902513783}
+  - {fileID: 1697417095}
+  - {fileID: 1489262928}
 --- !u!1001 &2143931183
 PrefabInstance:
   m_ObjectHideFlags: 0
