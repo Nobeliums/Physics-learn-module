@@ -5,21 +5,17 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-	private const float TimeStep = 1.0f; 
-	
 	[SerializeField] private float _startGameTimeInSeconds;
 	[SerializeField] private CoinCollector _coinCollector;
-	
-	private float _gameTimeLeft;
-	private float _timeStepConter;
-	
-	private int _previousAvailableCoins;
 
+	private int _previousAvailableCoins;
 	private bool _isGameEnd;
+
+	private Timer _timer;
 
 	private void Start()
 	{
-		_gameTimeLeft = _startGameTimeInSeconds;
+		_timer = new Timer(_startGameTimeInSeconds);
 		_isGameEnd = false;
 	}
 
@@ -27,7 +23,8 @@ public class GameController : MonoBehaviour
 	{
 		if (_isGameEnd == false)
 		{
-			CalculateTime();
+			_timer.TimePassed(Time.deltaTime);
+			_timer.ShowTimer();
 			CheckAvailableCoins();
 			CheckGameEnd();
 		}
@@ -51,7 +48,7 @@ public class GameController : MonoBehaviour
 
 	private void CheckGameEnd()
 	{
-		if (_gameTimeLeft <= 0.0f)
+		if (_timer.GameTimeLeft <= 0.0f)
 		{
 			_isGameEnd = true;
 			Lose();
@@ -61,18 +58,6 @@ public class GameController : MonoBehaviour
 		{
 			_isGameEnd = true;
 			Win();
-		}
-	}
-
-	private void CalculateTime()
-	{
-		_gameTimeLeft -= Time.deltaTime;
-		_timeStepConter += Time.deltaTime;
-
-		if (_timeStepConter >= TimeStep)
-		{
-			Debug.Log($"У вас осталось {_gameTimeLeft.ToString("0")} секунд!");
-			_timeStepConter = 0.0f;
 		}
 	}
 
